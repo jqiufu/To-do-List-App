@@ -1,6 +1,9 @@
 # To-do-List-App
 
-A simple To-do list
+A simple To-do list.
+You can test the project live at: https://jqiufu.github.io/To-do-List-App/
+
+# How to set up
 
 To set up this project locally,
 
