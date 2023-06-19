@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import './App.css';
 
@@ -24,17 +24,16 @@ const initialTodos = [
     title: 'Cook dinner',
     completed: false
   }
-]
+];
 
 function App() {
-
   const [todos, setTodos] = useState(initialTodos);
 
   // Function to toggle the complete property on the state
   const markComplete = (id, isCompleted) => {
-    const newTodos = todos.map(todo => {
+    const newTodos = todos.map((todo) => {
       if (todo.id === id) {
-        return {...todo, completed: isCompleted};
+        return { ...todo, completed: isCompleted };
       }
       return todo;
     });
@@ -43,12 +42,12 @@ function App() {
 
   // Function to delete a TodoItem
   const delTodo = (id) => {
-    const newTodos = [...todos.filter(todo => todo.id !== id)];
+    const newTodos = [...todos.filter((todo) => todo.id !== id)];
     setTodos(newTodos);
   };
 
   // Function to add a TodoItem
-  const addTodo = title => {
+  const addTodo = (title) => {
     const newItem = {
       id: uuidv4(),
       title,
@@ -59,20 +58,26 @@ function App() {
   };
 
   return (
-    <Router> 
-      <div className="App">
-        <div className="container">
-          <Header />
-          <Route exact path="/" render={props => (
+    <div className="App">
+      <div className="container">
+        <Header />
+        <Route
+          exact
+          path="/"
+          render={(props) => (
             <>
               <AddTodo addTodo={addTodo} />
-              <Todos todos={todos} markComplete={markComplete} delTodo={delTodo} />
+              <Todos
+                todos={todos}
+                markComplete={markComplete}
+                delTodo={delTodo}
+              />
             </>
-          )} />
-          <Route path="/about" component={About} />
-        </div>
+          )}
+        />
+        <Route path="/about" component={About} />
       </div>
-    </Router>
+    </div>
   );
 }
 
